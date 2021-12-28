@@ -1,16 +1,15 @@
-const fs = require('fs');
-const path = require('path');
-
 const express = require('express');
 // const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config()
 
+// const authRoutes = require('./routes/auth');
 
 const app = express();
 
 // app.use(bodyParser.json());
 
+// app.use('/api', authRoutes);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
