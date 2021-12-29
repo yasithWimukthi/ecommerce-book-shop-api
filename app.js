@@ -8,6 +8,7 @@ const morgan = require('morgan');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', productRoutes);
 
 mongoose
     .connect(
