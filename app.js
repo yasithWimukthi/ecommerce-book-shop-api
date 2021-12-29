@@ -6,6 +6,7 @@ require('dotenv').config()
 const morgan = require('morgan');
 
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -13,7 +14,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(morgan('dev'));
 
-app.use('/api/auth', authRoutes);
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
