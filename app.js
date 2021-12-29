@@ -1,15 +1,19 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 require('dotenv').config()
+const morgan = require('morgan');
 
-// const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(morgan('dev'));
 
-// app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

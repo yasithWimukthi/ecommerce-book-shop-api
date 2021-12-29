@@ -1,15 +1,17 @@
 const User = require('../models/user');
-const jwt = require('jsonwebtoken'); // to generate signed token
-const expressJwt = require('express-jwt'); // for authorization check
+const jwt = require('jsonwebtoken');
+const expressJwt = require('express-jwt');
 const { errorHandler } = require('../helpers/dbErrorHandler');
+const { validationResult } = require('express-validator');
 
 exports.signup = (req, res) => {
+
     const user = new User(req.body);
     user.save((err, user) => {
         if (err) {
             return res.status(400).json({
                 // error: errorHandler(err)
-                error: 'Email is taken'
+                error: 'Email is taken!'
             });
         }
         user.salt = undefined;
@@ -19,7 +21,6 @@ exports.signup = (req, res) => {
         });
     });
 };
-
 
 exports.signin = (req, res) => {
     // find the user based on email
@@ -52,10 +53,10 @@ exports.signout = (req, res) => {
     res.json({ message: 'Signout success' });
 };
 
-exports.requireSignin = expressJwt({
-    secret: process.env.JWT_SECRET,
-    userProperty: 'auth'
-});
+// exports.requireSignin = expressJwt({
+//     secret: process.env.JWT_SECRET,
+//     userProperty: 'auth'
+// });
 
 exports.isAuth = (req, res, next) => {
     let user = req.profile && req.auth && req.profile._id == req.auth._id;
