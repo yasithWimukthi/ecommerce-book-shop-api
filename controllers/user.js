@@ -65,7 +65,7 @@ exports.update = (req, res) => {
 
         user.save((err, updatedUser) => {
             if (err) {
-                console.log('USER UPDATE ERROR', err);
+                
                 return res.status(400).json({
                     error: 'User update failed'
                 });
